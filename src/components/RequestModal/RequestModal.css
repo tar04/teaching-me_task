@@ -1,0 +1,84 @@
+.wrap {
+    position: absolute;
+    margin: 0 auto;
+    border-radius: 15px;
+    background-color: snow;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    font-family: "Arial Narrow", serif;
+}
+
+.info {
+    display: flex;
+    column-gap: 10px;
+}
+
+.info_text {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    max-width: 270px;
+    padding: 6px;
+}
+
+.info_text > p {
+    color: dimgray;
+}
+
+.info_text > .date_info {
+    font-size: 0.7rem;
+}
+
+.info_image {
+    background-color: #D7E3FF;
+    padding: 10px;
+    height: fit-content;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info_close {
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info_close:hover {
+    box-shadow: 2px 2px 15px 3px gray;
+}
+
+.bot_buttons {
+    align-self: flex-end;
+    display: flex;
+    column-gap: 20px;
+}
+
+.bot_buttons > .details, .bot_buttons > .submit {
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid dimgray;
+    cursor: pointer;
+}
+
+.bot_buttons > .submit {
+    background-color: black;
+    color: snow;
+}
+
+.bot_buttons > .details {
+    background-color: snow;
+}
+
+.bot_buttons > button:hover {
+    box-shadow: 2px 2px 15px 3px gray;
+}

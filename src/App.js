@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import {Button, RequestModal} from "./components";
+import {categoriesService, teacherService} from "./services";
+import {avgPriceService} from "./services";
+import {normalizeArr} from "./utils";
 
-export default App;
+const App = () => {
+
+    const [isModalActive, setIsModalActive] = useState(false);
+
+    const showModal = () => {
+        setIsModalActive(prev => !prev)
+    }
+
+    const calcAvg = async () => {
+        const allCategories = normalizeArr(await categoriesService.getAll());
+
+        for (const category of allCategories) {
+            teacherService.getAll(category.code).then(data => {
+
+                teacherService.getAll(category.code, data.totalResults).then(({teachers}) => {
+                    const avgPrice = teachers.reduce((acc, item) => acc + item.pricePerHour, 0) / teachers.length;
+
+                    avgPriceService.sendInfo(category.name, avgPrice.toFixed(1));
+                })
+            })
+        }
+    }
+
+    return (
+        <div className="main">
+            <Button click={calcAvg}>Calculate average price</Button>
+            <Button click={showModal}>Show modal(task 2)</Button>
+            <RequestModal isModalActive={isModalActive} setIsModalActive={setIsModalActive}/>
+        </div>
+    );
+};
+
+export {App};
